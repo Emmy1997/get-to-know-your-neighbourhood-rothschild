@@ -42,5 +42,26 @@ window.CONTENT = {
     send: "שליחה",
     thanks: "תודה! נעדכן אותך 🙂"
   },
-  back: "חזרה לעמוד הראשי"
+  back: "חזרה לעמוד הראשי",
+  contact: {
+    title: "צרו איתנו קשר",
+    whatsappNumber: "972526700592",
+    email: "emmyabitbul@gmail.com",
+    items: [
+      {
+        id: "improvement",
+        label: "הצעות לשיפור",
+        whatsappText: "היי! יש לי הצעה לשיפור ל-Get to know your neighbourhood:",
+        emailSubject: "הצעה לשיפור – Get to know your neighbourhood"
+      },
+      {
+        id: "business",
+        label: "הצעות עסקיות",
+        whatsappText: "היי! יש לי הצעה עסקית ל-Get to know your neighbourhood:",
+        emailSubject: "הצעה עסקית – Get to know your neighbourhood"
+      }
+    ],
+    whatsappLabel: "וואטסאפ",
+    emailLabel: "מייל"
+  }
 };

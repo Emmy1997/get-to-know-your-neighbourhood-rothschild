@@ -44,3 +44,9 @@ textarea { min-height: 80px; resize: vertical; }
 .opts label { display: block; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; margin: 6px 0; background: var(--card); }
 .opts input { margin-inline-end: 8px; accent-color: var(--accent); }
 .thanks { color: var(--accent); font-weight: 700; }
+footer { max-width: 480px; margin: 8px auto 24px; padding: 0 16px; border-top: 1px solid var(--line); }
+footer h3 { font-size: 17px; margin: 14px 0 6px; color: var(--muted); }
+.contact-item { margin-bottom: 8px; }
+a.btn { text-align: center; text-decoration: none; }
+.btn.wa { background: #25a35a; margin: 6px 0 2px; }
+a.mail { display: block; text-align: center; color: var(--muted); font-size: 14px; padding: 6px; }

@@ -1,14 +1,27 @@
 // ===== הגדרות =====
 // הדביקו כאן את כתובת ה-Web App של Google Apps Script. ריק = רק console.log
 var ENDPOINT_URL = "";
+// טוקן Mixpanel (ציבורי מטבעו, זה תקין שהוא בקוד)
+var MIXPANEL_TOKEN = "cbadbdf6a2570d72120e2e44cc1ab3d2";
 // ==================
 
 var C = window.CONTENT;
 var U = new URLSearchParams(location.search).get("u") || "anonymous";
 var currentDoor = null;
 
+var MP = null;
+try {
+  if (window.mixpanel && MIXPANEL_TOKEN) {
+    mixpanel.init(MIXPANEL_TOKEN, { track_pageview: true, persistence: "localStorage" });
+    mixpanel.identify(U);
+    mixpanel.register({ u: U });
+    MP = mixpanel;
+  }
+} catch (e) { console.warn(e); }
+
 function track(event, details) {
   var payload = { u: U, event: event, details: details || {}, timestamp: new Date().toISOString() };
+  if (MP) { try { MP.track(event, payload.details); } catch (e) { console.warn(e); } }
   if (!ENDPOINT_URL) { console.log("[event]", payload); return; }
   try {
     fetch(ENDPOINT_URL, {
@@ -143,6 +156,27 @@ function show(name) {
   track("page_view", { screen: name === "door" ? "door_" + currentDoor : name });
 }
 
+function buildContact() {
+  var K = C.contact, f = document.getElementById("contact");
+  f.appendChild(el("h3", { text: K.title }));
+  K.items.forEach(function (it) {
+    var wa = el("a", {
+      class: "btn wa", target: "_blank", rel: "noopener",
+      href: "https://wa.me/" + K.whatsappNumber + "?text=" + encodeURIComponent(it.whatsappText),
+      text: it.label + " · " + K.whatsappLabel
+    });
+    wa.addEventListener("click", function () { track("contact_clicked", { topic: it.id, channel: "whatsapp" }); });
+    var mail = el("a", {
+      class: "mail",
+      href: "mailto:" + K.email + "?subject=" + encodeURIComponent(it.emailSubject),
+      text: it.label + " · " + K.emailLabel
+    });
+    mail.addEventListener("click", function () { track("contact_clicked", { topic: it.id, channel: "email" }); });
+    f.appendChild(el("div", { class: "contact-item" }, [wa, mail]));
+  });
+}
+
+buildContact();
 screens.landing = buildLanding();
 screens.history = buildHistory();
 screens.door = buildDoor();

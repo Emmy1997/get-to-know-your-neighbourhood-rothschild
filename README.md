@@ -34,5 +34,12 @@ https://YOUR-SITE/?u=noa
 ```
 בלי `u` נרשם `anonymous`.
 
+## Mixpanel
+הטוקן מוגדר ב-`MIXPANEL_TOKEN` בראש `app.js`, עם `track_pageview` פעיל. כל אירוע נשלח גם ל-Mixpanel וגם ל-Google Sheet. המשתמש מזוהה ב-Mixpanel לפי `u`.
+אם פרויקט ה-Mixpanel שלך בשרתי EU, צריך להוסיף `api_host: "https://api-eu.mixpanel.com"` ל-`mixpanel.init`.
+
+## צור קשר
+בתחתית הדף: "הצעות לשיפור" ו"הצעות עסקיות", כל אחד עם כפתור וואטסאפ והודעה מוכנה, וקישור מייל. המספר, המייל והנוסחים ב-`content.js`.
+
 ## אירועים
-`page_view`, `choice_clicked` (choice, is_first_choice), `want_more_clicked`, `open_question_submitted`, `fake_door_submitted` (door: kids/food/more_streets, for_whom, contact), `back_clicked`.
+`page_view`, `choice_clicked` (choice, is_first_choice), `want_more_clicked`, `open_question_submitted`, `fake_door_submitted` (door: kids/food/more_streets, for_whom, contact), `back_clicked`, `contact_clicked` (topic: improvement/business, channel: whatsapp/email).
